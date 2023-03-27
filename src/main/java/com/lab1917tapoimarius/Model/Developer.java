@@ -1,10 +1,13 @@
 package com.lab1917tapoimarius.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "relationClass"})
 //@Table(name = "DEVELOPER")
 public class Developer {
     //@Column
@@ -21,6 +24,7 @@ public class Developer {
     private Integer revenue;
 
     @OneToMany(mappedBy = "developer")
+    @JsonIgnore
     private Set<Game> games;
 
     public Developer() {

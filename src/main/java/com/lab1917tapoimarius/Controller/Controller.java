@@ -20,7 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "http://localhost:80")
 @RestController
 public class Controller {
     @Autowired
@@ -182,5 +182,11 @@ public class Controller {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    @PostMapping("/developers/{id}/game/")
+    public ResponseEntity<List<Game>> addMultipleGames(@RequestBody List<Game> gameRequest, @PathVariable long id){
+        List<Game> games = gameService.addMultipleGames(gameRequest, id);
+        return ResponseEntity.ok().body(games);
     }
 }

@@ -1,8 +1,11 @@
 package com.lab1917tapoimarius.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "relationClass"})
 //@Table(name = "GAME")
 public class Game {
     //@Column
@@ -19,6 +22,7 @@ public class Game {
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "dev_id")
     private Developer developer;
 
@@ -90,7 +94,9 @@ public class Game {
         this.developer = developer;
     }
 
-    public Developer getDeveloperEntity(){return developer;}
+    public Developer getDeveloperEntity(){
+        return developer;
+    }
 
     @Override
     public String toString() {
